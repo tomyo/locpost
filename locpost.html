@@ -38,35 +38,34 @@
   <div><button id="location-btn">Update location</button> <span id="my-location">Unknown</span></div>
 
   <h1>Messages</h1>
-  <textarea id="messages" placeholder="Welcome to this geochat!"></textarea>
 
-  <details>
-    <summary><h1>Geopad</h1></summary>
-    <textarea id="paste" placeholder="paste here!"></textarea>
-  </details>
+  <div>
+    <button id="show-all-btn">Show all</button>
+    <button id="only-nearby-btn">Only nearby</button>
+    <button id="show-home-btn">Only 'home'</button>
+  </div>
+
+  <textarea id="messages" placeholder="Welcome to this geochat!"></textarea>
 
   <script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script>
 
-
-  <!-- gun - textarea-->
   <script>
-    //gun = Gun(['http://localhost:8765/gun', 'https://gun-manhattan.herokuapp.com/gun']);
+    // gun initialization
 
+    //gun = Gun(['http://localhost:8765/gun', 'https://gun-manhattan.herokuapp.com/gun']);
     // Don't rely on this node for demo https://gun-manhattan.herokuapp.com/stats.html
     gun = Gun('https://gun-manhattan.herokuapp.com/gun');
-    copy = gun.get('test').get('paste');
-    paste.oninput = () => { copy.put(paste.value) };
-    copy.on((data) => { paste.value = data });
+    //gun = Gun('http://to.pablog.me:8765/gun');
 
-    messages = gun.get('messages')
-  </script>
-
+    var dbname = "messages-" + window.location.hash.split("#")[1] + "-98123791873187"
+    console.log("GunDB: ", dbname)
+    messages = gun.get(dbname)
   
-  <!-- leaflet stuff -->
-  <script>
+    // leaflet stuff
+
     var markers = {}
     var factory = [52.4940562, 13.4463269];
     var map = L.map('map').setView(factory, 15);
@@ -74,31 +73,20 @@
       maxZoom: 19,
       attribution: '© OpenStreetMap & ETHBerlin'
     }).addTo(map);
+    addIcon(factory, "ethberlin")
 
     function onMapClick(e) {
-      var message=window.prompt();
-      data = {title: message, latitude: e.latlng.lat, longitude: e.latlng.lng}
-      console.log(e.latlng)
-      console.log(data)
-      messages.set(data)
+      var title = window.prompt("Enter title:");
+      var content = window.prompt("Enter content:");
+      if (title != null && content != null) {
+        date = new Date().toLocaleTimeString()
+        data = {title: title, content: content, latitude: e.latlng.lat, longitude: e.latlng.lng, date: date}
+        messages.set(data)
+       }
     }
     map.on('click', onMapClick);
   
-    function addMarker(msg, id) {
-      markers[id] = L.marker([msg.latitude, msg.longitude]).addTo(map);
-      markers[id].bindPopup(msg.title).openPopup();
-    }     
-
-    function removeMarker(id) {
-      if (markers[id] !== undefined) {
-        markers[id].remove();
-        delete markers[id];
-      }
-    }
-  </script>
-
-  <!-- gun messages-->
-  <script>
+    // Send and receive messages from gun
     
     $('#send-message').on('submit', function (event) {
       var title = $('#input-message').val()
@@ -116,13 +104,46 @@
       $('#my-location').html(coords)
     })
 
+    $('#show-all-btn').on('click', function (event) {
+      $('#messages').val("");
+      messages.map(msg => {
+        current = $('#messages').val()
+        $('#messages').val(current + "\n" + "(" + msg.latitude + ", " + msg.longitude + ") " + msg.title)
+        console.log(msg)
+      })
+    })
+
+    $('#only-nearby-btn').on('click', function (event) {
+      $('#messages').val("");
+      var THRESHOLD = 0.01
+      messages.map(msg => {
+        if ((Math.abs(msg.latitude - factory[0]) < THRESHOLD) && (Math.abs(msg.longitude - factory[1]) < THRESHOLD)) {
+          current = $('#messages').val()
+          $('#messages').val(current + "\n" + "(" + msg.latitude + ", " + msg.longitude + ") " + msg.title)
+          console.log("nearby:", msg)
+        } else {
+          console.log("too far:", msg)
+        }
+      })
+    })
+
+    $('#show-home-btn').on('click', function (event) {
+      $('#messages').val("");
+      messages.map(msg => {
+        if (msg.title == 'home') {
+          current = $('#messages').val()
+          $('#messages').val(current + "\n" + "(" + msg.latitude + ", " + msg.longitude + ") " + msg.title)
+        }
+      })
+    })
+    
     messages.map().on(function (msg, id) {
       var li = $('#' + id)
       if (!li.get(0)) {
         li = $('<li>').attr('id', id).appendTo('ul')
       }
       if (msg) {
-        var html = '<span onclick="clickTitle(this)">' + msg.title + '(' + msg.latitude + ',' + msg.longitude + ')</span>'
+        var html = '<span onclick="clickTitle(this)">' + msg.title + ' (' + msg.latitude + ',' + msg.longitude + ')</span>'
         html = '<input type="checkbox" onclick="clickCheck(this)" ' + (msg.done ? 'checked' : '') + '>' + html
         html += '<img onclick="clickDelete(this)" src="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-x.svg"/>'
         li.html(html)
@@ -135,6 +156,10 @@
         removeMarker(id)
       }
     })
+
+
+    // helpers
+
 
     function clickTitle (element) {
       element = $(element)
@@ -155,9 +180,45 @@
     }
 
     function clickDelete (element) {
-      console.log("Removed element " + element)
-      messages.get($(element).parent().attr('id')).put(null)
+      var id = $(element).parent().attr('id');
+      console.log("Removed element " + element + " id: " + id)
+      removeMarker(id)
+      messages.get(id).put(null)
     }
+
+
+    // color: red, green, gold
+    function addMarker(msg, id, color) {
+      console.log("addMarker id=" + id)
+      markers[id] = L.marker([msg.latitude, msg.longitude]).addTo(map);
+      //markers[id].bindPopup(msg.title).openPopup();
+    }     
+
+    function addIcon(coords, icon) {
+      console.log("addIcon")
+
+      var myIcon = L.icon({
+        iconUrl: icon + '.png',
+        iconSize: [38, 95],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76],
+        shadowUrl: icon + '-shadow.png',
+        shadowSize: [68, 95],
+        shadowAnchor: [22, 94]
+        });
+      L.marker(coords, {icon: myIcon}).addTo(map);
+
+    }
+
+    function removeMarker(id) {
+      console.log("removeMarker: " + id)
+      if (markers[id] !== undefined) {
+        markers[id].remove();
+        delete markers[id];
+        console.log("removed marker id: " + id)
+      }
+    }
+
   </script>
 
 
