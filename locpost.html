@@ -43,6 +43,7 @@
     <button id="show-all-btn">Show all</button>
     <button id="only-nearby-btn">Only nearby</button>
     <button id="show-home-btn">Only 'home'</button>
+    <span id="n-results"></span>
   </div>
 
   <textarea id="messages" placeholder="Welcome to this geochat!"></textarea>
@@ -59,9 +60,11 @@
     // Don't rely on this node for demo https://gun-manhattan.herokuapp.com/stats.html
     gun = Gun('https://gun-manhattan.herokuapp.com/gun');
     //gun = Gun('http://to.pablog.me:8765/gun');
+    // gun = Gun('https://to.pablog.me/gun');
 
-    var dbname = "messages-" + window.location.hash.split("#")[1] + "-98123791873187"
+    var dbname = "messages-" + window.location.hash.split("#")[1]
     console.log("GunDB: ", dbname)
+    locpost = gun.get('locpost')
     messages = gun.get(dbname)
   
     // leaflet stuff
@@ -76,11 +79,12 @@
     addIcon(factory, "ethberlin")
 
     function onMapClick(e) {
-      var title = window.prompt("Enter title:");
+      var title = "title"
       var content = window.prompt("Enter content:");
+      var author = "author"
       if (title != null && content != null) {
-        date = new Date().toLocaleTimeString()
-        data = {title: title, content: content, latitude: e.latlng.lat, longitude: e.latlng.lng, date: date}
+        date = new Date().toISOString()
+        data = {title: title, content: content, latitude: e.latlng.lat, longitude: e.latlng.lng, date: date, nickname: author}
         messages.set(data)
        }
     }
@@ -98,43 +102,70 @@
     })
 
     $('#location-btn').on('click', function (event) {
-      console.log("Updating location (fake)")
-      coords = "52.4940562, 13.4463269"
-      $('#input-location').val(coords)
-      $('#my-location').html(coords)
+      if (navigator.geolocation) {
+        console.log("geolocation")
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        console.log("Updating location (fake)")
+        coords = "52.4940562, 13.4463269"
+        $('#input-location').val(coords)
+        $('#my-location').html("Geolocation is not supported by this browser")
+      }
+      
+      function showPosition(position) {
+        coords = position.coords.latitude + ", " + position.coords.longitude
+        $('#input-location').val(coords)
+        $('#my-location').html(coords)
+      }
     })
 
     $('#show-all-btn').on('click', function (event) {
       $('#messages').val("");
+      var found = 0
       messages.map(msg => {
-        current = $('#messages').val()
-        $('#messages').val(current + "\n" + "(" + msg.latitude + ", " + msg.longitude + ") " + msg.title)
-        console.log(msg)
+        if (msg != null) {
+          found++
+          current = $('#messages').val()
+          $('#messages').val(current + "\n" + "(" + msg.latitude + ", " + msg.longitude + ") " + msg.title)
+          console.log(msg)
+        }
       })
+      $('#n-results').html("Got " + found + " results")
     })
 
     $('#only-nearby-btn').on('click', function (event) {
       $('#messages').val("");
       var THRESHOLD = 0.01
+      var found = 0
       messages.map(msg => {
-        if ((Math.abs(msg.latitude - factory[0]) < THRESHOLD) && (Math.abs(msg.longitude - factory[1]) < THRESHOLD)) {
-          current = $('#messages').val()
-          $('#messages').val(current + "\n" + "(" + msg.latitude + ", " + msg.longitude + ") " + msg.title)
-          console.log("nearby:", msg)
-        } else {
-          console.log("too far:", msg)
+        if (msg != null) {
+          if ((Math.abs(msg.latitude - factory[0]) < THRESHOLD) && (Math.abs(msg.longitude - factory[1]) < THRESHOLD)) {
+            current = $('#messages').val()
+            $('#messages').val(current + "\n" + "(" + msg.latitude + ", " + msg.longitude + ") " + msg.title)
+            console.log("nearby:", msg)
+            found++
+          } else {
+            console.log("too far:", msg)
+          }
+  
         }
       })
+      $('#n-results').html("Got " + found + " results")
     })
 
     $('#show-home-btn').on('click', function (event) {
       $('#messages').val("");
+      var found = 0
       messages.map(msg => {
-        if (msg.title == 'home') {
-          current = $('#messages').val()
-          $('#messages').val(current + "\n" + "(" + msg.latitude + ", " + msg.longitude + ") " + msg.title)
+        if (msg != null) {
+          if (msg.title == 'home') {
+            found++
+            current = $('#messages').val()
+            $('#messages').val(current + "\n" + "(" + msg.latitude + ", " + msg.longitude + ") " + msg.title)
+          }
         }
       })
+      $('#n-results').html("Got " + found + " results")
     })
     
     messages.map().on(function (msg, id) {

@@ -1,5 +1,5 @@
 deploy:
-		scp locpost.html tools:/var/www/nextcloud/
+		scp locpost.html ethberlin.png tools:/var/www/nextcloud/
 
 dev:
 	python3 -m  http.server
