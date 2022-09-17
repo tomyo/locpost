@@ -79,12 +79,12 @@
     addIcon(factory, "ethberlin")
 
     function onMapClick(e) {
-      var title = "title"
-      var content = window.prompt("Enter content:");
+      var title = window.prompt("Enter title:");
+      var message = "message"
       var author = "author"
-      if (title != null && content != null) {
+      if (title != null && message != null) {
         date = new Date().toISOString()
-        data = {title: title, content: content, latitude: e.latlng.lat, longitude: e.latlng.lng, date: date, nickname: author}
+        data = {title: title, message: message, latitude: e.latlng.lat, longitude: e.latlng.lng, date: date, nickname: author}
         messages.set(data)
        }
     }
