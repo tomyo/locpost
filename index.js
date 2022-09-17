@@ -1,4 +1,4 @@
-import { getCurrentPosition } from './lib/geolocation.js'
+import { getCurrentPosition } from './utils/geolocation.js'
 
 const getLocationButton = document.querySelector('#get-location');
 
