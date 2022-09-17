@@ -7,10 +7,10 @@
   --color-accent: #ba0d37;
 }
 
-html, body {
+body {
   padding: 0;
   margin: 0;
-  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
 }
 
 body {
@@ -35,7 +35,7 @@ img {
 }
 
 a.button, button {
-  padding: 1em 3em;
+  padding: 0.5rem 2rem;
   color:var(--color-text-default);
   background-color: var(--color-base);
   border-color: var(--color-border);

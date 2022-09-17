@@ -9,7 +9,7 @@ main {
   align-items: center;
   margin: 1rem;
   gap: 2rem;
-  max-width: 40rem;
+  max-width: 60ch;
 }
 
 main > img {
