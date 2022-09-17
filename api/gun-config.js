@@ -8,6 +8,7 @@ export const config = {
     latitude: Number,
     longitude: Number,
     message: String,
-    date: String, // ISO
+    date: String, // ISO UTC
+    nickname: String,
   }
 }
