@@ -1,0 +1,75 @@
+/* Light theme: default  */
+:root {
+  --color-background: #ffffff;
+  --color-border: #cacfd5;
+  --color-text-default: #0b1016;
+  --color-base: #f4f5f6;
+  --color-accent: #ba0d37;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-default);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+p {
+  line-height: 1.5;
+}
+
+img {
+  filter: drop-shadow(0 2px 4px #969696);
+}
+
+a.button, button {
+  padding: 1em 3em;
+  color:var(--color-text-default);
+  background-color: var(--color-base);
+  border-color: var(--color-border);
+  border-radius: 5px;
+}
+
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+  --color-background: #38444c;
+  --color-border: #697278;
+  --color-text-default: #f0f2f3;
+  --color-base: #293238;
+  --color-accent: #ec1a62; }
+
+  p {
+    font-family: var(--font-family-light);
+    line-height: 1.7;
+    word-spacing: .05em;
+  }
+
+  button {
+    font-size: inherit;
+  }
+
+  img {
+    filter: drop-shadow(0 2px 4px #0b0b0b);
+    max-width: 100vw;
+    opacity: .75;
+    transition: opacity .5s ease-in-out;
+  }
+
+  img:hover {
+    opacity: 1;
+  }
+}
