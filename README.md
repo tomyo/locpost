@@ -4,7 +4,7 @@ Censorship resistant location-based messages that empowers anyone to have a voic
 
 Check it out online at https://tomyo.github.io/locpost/
 
-![logo](images/radar.svg)
+![logo](images/radar_100x100.png)
 
 We use [GUN](https://gun.eco/) to create a distributed database which is stored amongst the network participants in their local storage inside the web browser.
 Each participant will keep a copy of the database and GUN will take care of keeping them in sync.
