@@ -14,6 +14,7 @@
 
 
 <main>
+  <h1>Messages around</h1>
   <div id="messages"></div>
   <button id="create-new-message" aria-label="Create new message">
     +
@@ -24,13 +25,13 @@
 <dialog>
   <form method="dialog">
     <label>
-      Nickname<br />
-      <input name="nickname" type="text" placeholder="Who is writing this?" value="Anonymous">
+      Message *<br />
+      <textarea name="message" rows="10" placeholder="Write the message you want to leave here..."></textarea>
     </label>
 
     <label>
-      Message *<br />
-      <textarea name="message" rows="10" placeholder="The message you want to leave here..."></textarea>
+      Nickname<br />
+      <input name="nickname" type="text" placeholder="Anonymous?">
     </label>
 
     <div class="buttons">
@@ -39,10 +40,3 @@
     </div>
   </form>
 </dialog>
-
-<!-- 
-@for $i from 0 through 25 {
-  &:nth-child(#{$i}) {
-    background-color: hsl(-30 + ($i * 30), 100%, 88%);
-  }
-} -->
