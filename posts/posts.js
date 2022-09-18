@@ -52,7 +52,7 @@ function insertMessageIntoDom(msg, id, { inserFunctionName = "prepend" } = {}) {
   div.classList.add("message");
   div.querySelector('div').innerText = msg.message;
   div.querySelector('small').innerText = "By " + msg.nickname;
-  div.querySelector('time').innerText = "@ " + msg.date;
+  div.querySelector('time').innerText = "@ " + new Date(msg.date).toUTCString();
   document.querySelector('#posts')[inserFunctionName](div);
 }
 
