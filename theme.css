@@ -1,17 +1,45 @@
-/* Light theme: default  */
-:root {
-  --color-background: #ffffff;
-  --color-border: #cacfd5;
-  --color-text-default: #0b1016;
-  --color-base: #f4f5f6;
-  --color-accent: #ba0d37;
-  --border-radius: 5px;
+@font-face {
+	font-family: "system-ui";
+	font-style: normal;
+	font-weight: 300;
+	src: local(".SFNS-Light"), local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Segoe UI Light"), local("Ubuntu Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
 }
 
-body {
-  padding: 0;
-  margin: 0;
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
+
+/* Dark theme: default */
+:root {
+  --color-background: #38444c;
+  --color-border: #697278;
+  --color-text-default: #f0f2f3;
+  --color-base: #293238;
+  --color-accent: #ec1a62; 
+  --font-family-primary: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --font-family-secondary: "system-ui";
+  --font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+html {
+  color-scheme: dark;
+}
+
+p {
+  line-height: 1.7;
+  word-spacing: .05em;
+}
+
+button {
+  font-size: inherit;
+}
+
+img {
+  filter: drop-shadow(0 2px 4px #0b0b0b);
+  max-width: 100vw;
+  opacity: .75;
+  transition: opacity .5s ease-in-out;
+}
+
+img:hover {
+  opacity: 1;
 }
 
 body {
@@ -20,6 +48,9 @@ body {
     sans-serif;
   background-color: var(--color-background);
   color: var(--color-text-default);
+  padding: 0;
+  margin: 0;
+  font-size: var(--font-size);
 }
 
 * {
@@ -31,10 +62,6 @@ p {
   line-height: 1.5;
 }
 
-img {
-  filter: drop-shadow(0 2px 4px #969696);
-}
-
 a.button, button {
   padding: 0.5rem 2rem;
   color:var(--color-text-default);
@@ -44,33 +71,22 @@ a.button, button {
 }
 
 
-/* Dark theme */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+  }
+  
   :root {
-  --color-background: #38444c;
-  --color-border: #697278;
-  --color-text-default: #f0f2f3;
-  --color-base: #293238;
-  --color-accent: #ec1a62; }
-
-  p {
-    font-family: var(--font-family-light);
-    line-height: 1.7;
-    word-spacing: .05em;
+    --color-background: #ffffff;
+    --color-border: #cacfd5;
+    --color-text-default: #0b1016;
+    --color-base: #f4f5f6;
+    --color-accent: #ba0d37;
+    --border-radius: 5px;
   }
 
-  button {
-    font-size: inherit;
-  }
 
   img {
-    filter: drop-shadow(0 2px 4px #0b0b0b);
-    max-width: 100vw;
-    opacity: .75;
-    transition: opacity .5s ease-in-out;
-  }
-
-  img:hover {
-    opacity: 1;
+    filter: drop-shadow(0 2px 4px #969696);
   }
 }
