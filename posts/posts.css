@@ -40,6 +40,7 @@ main h1 {
 #posts {
   display: flex;
   flex-direction: column;
+  margin-block-end: 5rem;
 }
 
 #posts > *{
@@ -66,6 +67,7 @@ dialog {
   border-radius: var(--border-radius);
   width: 90%;
   max-width: 60ch;
+  border-width: 1px;
 }
 
 dialog[open] {
