@@ -1,16 +1,18 @@
-body {
-  display: grid;
-  place-items: center;
-}
-
 main {
   max-width: 60ch;
+  margin: 0 auto;
+}
+
+main h1 {
+  text-align: center;
 }
 
 #create-new-message {
   position: fixed;
-  bottom: 2em;
-  right: 2em;
+  bottom: 2rem;
+  right: 2rem;
+  font-size: 3rem;
+  background-color: deeppink;
 }
 
 @supports(aspect-ratio: 1) {
