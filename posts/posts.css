@@ -9,10 +9,12 @@ main h1 {
 
 #create-new-message {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.5rem;
+  right: 1.4rem;
   font-size: 3rem;
   background-color: deeppink;
+  display: flex;
+  place-items: center;
 }
 
 @media (prefers-color-scheme: light) {
