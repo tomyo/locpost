@@ -70,7 +70,8 @@ useMessages(getContextName()).map().once(function (msg, id) {
 
 // Update title
 const [lat, lon] = getContextName().split(',');
-document.querySelector('h1').innerText += ` ${lat}°, ${lon}°`;
+const toAppend = lon ? `${lat}°, ${lon}°` : getContextName();
+document.querySelector('h1').innerText += ' ' + toAppend;
 
 
 console.info('Context:', getContextName());
