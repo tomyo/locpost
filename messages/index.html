@@ -25,13 +25,12 @@
 <dialog>
   <form method="dialog">
     <label>
-      Message *<br />
-      <textarea name="message" rows="10" placeholder="Write the message you want to leave here..."></textarea>
+      <textarea name="message" rows="10" placeholder="Write the message you want to leave here..." required></textarea>
     </label>
 
     <label>
       Nickname<br />
-      <input name="nickname" type="text" placeholder="Anonymous?">
+      <input name="nickname" type="text" placeholder="Who is writing this?" value="Anonymous" required>
     </label>
 
     <div class="buttons">
