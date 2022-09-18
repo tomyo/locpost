@@ -5,6 +5,7 @@
   --color-text-default: #0b1016;
   --color-base: #f4f5f6;
   --color-accent: #ba0d37;
+  --border-radius: 5px;
 }
 
 body {
