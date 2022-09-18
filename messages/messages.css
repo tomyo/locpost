@@ -15,7 +15,7 @@ main h1 {
   background-color: deeppink;
 }
 
-@supports(aspect-ratio: 1) {
+@supports (aspect-ratio: 1) {
   #create-new-message {
     aspect-ratio: 1;
     border-radius: 50%;

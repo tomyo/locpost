@@ -68,4 +68,9 @@ useMessages(getContextName()).map().once(function (msg, id) {
   insertMessageIntoDom(msg, id);
 });
 
-console.info('Context:', getContextName())
+// Update title
+const [lat, lon] = getContextName().split(',');
+document.querySelector('h1').innerText += ` ${lat}°, ${lon}°`;
+
+
+console.info('Context:', getContextName());
