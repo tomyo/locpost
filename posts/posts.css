@@ -16,10 +16,17 @@ main h1 {
   display: flex;
   place-items: center;
 }
+#create-new-message img {
+  filter: invert(1);
+  width: 1.5rem;
+}
 
 @media (prefers-color-scheme: light) {
   #create-new-message {
     background-color: cyan;
+  }
+  #create-new-message img {
+    filter: none;
   }
 }
 
