@@ -68,10 +68,27 @@ dialog {
   width: 90%;
   max-width: 60ch;
   border-width: 1px;
+  background-color: inherit;
 }
 
 dialog[open] {
-  animation: dialog-show 300ms ease normal;
+  animation: dialog-show 400ms ease normal;
+}
+
+@keyframes dialog-show {
+  from {
+      opacity: 0;
+  }
+  to {
+     opacity: 1;
+  }
+}
+
+
+dialog::backdrop {
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(0.5rem);
+  -webkit-backdrop-filter: blur(0.5rem);
 }
 
 dialog form {
@@ -84,9 +101,14 @@ dialog form {
 dialog form input,
 dialog form textarea {
   width: 100%;
+  margin-block-start: 0.25rem;
 }
 
 dialog .buttons {
   display: flex;
   gap: 1rem;
+}
+
+dialog .buttons button {
+  flex: 1;
 }
