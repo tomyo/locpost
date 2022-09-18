@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="description" content="Location-based messages." />
+  <title>LocPost · Messages</title>
+
+  <link rel="stylesheet" href="/theme.css" />
+  <link rel="stylesheet" href="./messages.css" />
+  <script src="./messages.js" type="module" async></script>
+</head>
+
+
+<main>
+  <div id="messages"></div>
+  <button id="create-new-message" aria-label="Create new message">
+    +
+  </button>
+</main>
+
+
+<dialog>
+  <form method="dialog">
+    <label>
+      Nickname<br />
+      <input name="nickname" type="text" placeholder="Who is writing this?" value="Anonymous">
+    </label>
+
+    <label>
+      Message *<br />
+      <textarea name="message" rows="10" placeholder="The message you want to leave here..."></textarea>
+    </label>
+
+    <div class="buttons">
+      <button value="close">Cancel</button>
+      <button value="ok">Post</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- 
+@for $i from 0 through 25 {
+  &:nth-child(#{$i}) {
+    background-color: hsl(-30 + ($i * 30), 100%, 88%);
+  }
+} -->

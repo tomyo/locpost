@@ -1,0 +1,57 @@
+#create-new-message {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+}
+
+@supports(aspect-ratio: 1) {
+  #create-new-message {
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+}
+
+#messages {
+  display: flex;
+  flex-direction: column;
+}
+
+#messages > *{
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+}
+
+.message:nth-of-type(odd) {
+  background-color: rgba(200,200,200,0.3);
+}
+.message:nth-of-type(even) {
+  background-color: rgba(0,0,0,0.3);
+}
+
+dialog {
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 60ch;
+}
+
+dialog[open] {
+  animation: dialog-show 300ms ease normal;
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  user-select: text;
+}
+
+dialog form input,
+dialog form textarea {
+  width: 100%;
+}
+
+dialog .buttons {
+  display: flex;
+  gap: 1rem;
+}
