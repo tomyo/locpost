@@ -78,7 +78,7 @@ a.button, button {
   }
   
   :root {
-    --color-background: #ffffff;
+    --color-background: antiquewhite;
     --color-border: #cacfd5;
     --color-text-default: #0b1016;
     --color-base: #f4f5f6;
