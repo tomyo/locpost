@@ -66,7 +66,7 @@ useMessages(getContextName()).map().once(function (msg, id) {
     console.debug('No message arrived:', msg, id);
     return;
   }
-  insertMessageIntoDom(msg, id);
+  msg.message && insertMessageIntoDom(msg, id);
 });
 
 // Update title
