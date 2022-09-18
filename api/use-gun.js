@@ -13,7 +13,7 @@ export function useGun(GUN, {
   if (gun) return gun;
   if (typeof (window.GUN) === 'undefined') throw Error('GUN is not available in global scope');
 
-  gun = window.GUN(localHostUrl, remoteHostUrl);
+  gun = window.GUN([localHostUrl, remoteHostUrl]);
   return gun;
 }
 
