@@ -17,8 +17,8 @@ export function useGun(GUN, {
   return gun;
 }
 
-export function useMessages({ messagesChannelName = 'messages' } = {}) {
+export function useMessages(context, { searchKeyPrefix = 'messages-' } = {}) {
 
   const gun = useGun();
-  return gun.get(messagesChannelName);
+  return gun.get(searchKeyPrefix + context);
 }
