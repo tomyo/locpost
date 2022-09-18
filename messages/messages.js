@@ -16,21 +16,25 @@ function setUpPublishNewMessage() {
       message[key] = value;
     }
     message.date = new Date().toISOString();
-    message.latitude = searchParams.get('lat');
-    message.longitude = searchParams.get('lon');
     return message
   }
 
   const button = document.querySelector('#create-new-message');
   const dialog = document.querySelector('dialog');
   const form = document.querySelector('form');
+  const cancelButton = form.querySelector('[type="button"]');
 
   button.addEventListener('click', () => {
     dialog.showModal();
   })
 
-  dialog.addEventListener("close", function (event) {
-    if (dialog.returnValue === 'close') return;
+  cancelButton.addEventListener('click', () => {
+    dialog.close();
+  })
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
     const message = formatNewMessage(new FormData(form));
     useMessages(getContextName()).set(message);
     form.reset();
@@ -64,4 +68,4 @@ useMessages(getContextName()).map().once(function (msg, id) {
   insertMessageIntoDom(msg, id);
 });
 
-console.log('context', getContextName())
+console.info('Context:', getContextName())
