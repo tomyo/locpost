@@ -38,6 +38,7 @@ function setUpPublishNewMessage() {
     const message = formatNewMessage(new FormData(form));
     useMessages(getContextName()).set(message);
     form.reset();
+    dialog.close();
   });
 };
 
