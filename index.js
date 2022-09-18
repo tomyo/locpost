@@ -10,7 +10,7 @@ getLocationButton.addEventListener('click', async (e) => {
   try {
     const coords = (await getCurrentPosition())?.coords;
     console.info("Got location:", coords);
-    redirectToContext(getLocationContext(coords), getCoordsParams(coords))
+    redirectToContext(getLocationContext(coords))
   }
   catch (error) {
     alert(error.message);
@@ -22,18 +22,6 @@ function getLocationContext(coords, { decimals = 2 } = {}) {
   const lat = latitude.toFixed(decimals);
   const lon = longitude.toFixed(decimals);
   return `${lat},${lon}`
-}
-
-function getCoordsParams(coords) {
-  const result = {};
-  coords.accuracy ? result.accuracy = coords.accuracy : '';
-  coords.altitude ? result.altitude = coords.altitude : '';
-  coords.altitudeAccuracy ? result.altitudeAccuracy = coords.altitudeAccuracy : '';
-  coords.heading ? result.heading = coords.heading : '';
-  coords.latitude ? result.latitude = coords.latitude : '';
-  coords.longitude ? result.longitude = coords.longitude : '';
-  coords.speed ? result.speed = coords.speed : '';
-  return result
 }
 
 function redirectToContext(context, queryParams = {}) {
