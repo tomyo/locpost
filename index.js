@@ -25,7 +25,7 @@ function getLocationContext(coords, { decimals = 2 } = {}) {
 }
 
 function redirectToContext(context, queryParams = {}) {
-  const pathname = `./messages/`;
+  const pathname = `./posts/`;
   const url = new URL(pathname, location);
   url.search = new URLSearchParams({ ...queryParams, context });
   window.location.href = url;
