@@ -52,6 +52,7 @@ main h1 {
 }
 .message > *:first-child {
   font-size: x-large;
+  line-break: anywhere;
 }
 
 dialog {
