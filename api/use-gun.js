@@ -6,14 +6,19 @@ import '../lib/webrtc.js';
 
 let gun;
 
-export function useGun(GUN, {
-  localHostUrl = 'http://localhost:8765/gun',
-  remoteHostUrl = 'https://gun-manhattan.herokuapp.com/gun',
-} = {}) {
+/**
+ *
+ * @param {Object} options - See https://gun.eco/docs/API#options
+ * @returns A configured instance of gun.
+ */
+export function useGun({ peers = [
+  'http://localhost:8765/gun',
+  'https://gunrelayeurope.herokuapp.com/gun',
+] } = {}) {
   if (gun) return gun;
   if (typeof (window.GUN) === 'undefined') throw Error('GUN is not available in global scope');
 
-  gun = window.GUN([localHostUrl, remoteHostUrl]);
+  gun = window.GUN({ peers });
   return gun;
 }
 
