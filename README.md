@@ -11,11 +11,15 @@ Each participant will keep a copy of the database and GUN will take care of keep
 
 By requesting access to your location and based on that, you will join a censorship-resistant context (location) to exchange messages.
 
-# ETHBerlin³ hackathon
+## Instalation
+ * Install pre-commit hook: `pre-commit install`
+ * Run development environment: `make dev`
+
+## ETHBerlin³ hackathon
 
 This project was made during the awesome [ETHBerlin³ hackathon](https://ethberlin.ooo/) during 16-18th September 2022.
 
-# Authors
+## Authors
 
 * Tomás Hayes (idea, frontend) - [@tomyo](https://github.com/tomyo)
 * Pablo Castellano (backend) - [@PabloCastellano](https://github.com/PabloCastellano)
