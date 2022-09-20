@@ -1,22 +1,23 @@
 import { useMessages } from '../api/use-gun.js'
 
-function getSearchQueryString(key) {
+function getQueryString(key) {
   return new URLSearchParams(location.search).get(key);
 }
 
-function getContextName(contextSearchParam = 'context') {
-  return getSearchQueryString(contextSearchParam);
+function getLocationName(scopeSearchParam = 'location') {
+  const v0_key = 'context';   // v0 search query was `context`
+
+  return getQueryString(scopeSearchParam) || getQueryString(v0_key);
 }
 
 function setUpPublishNewMessage() {
   function formatNewMessage(formData) {
     const message = {}
-    const searchParams = new URLSearchParams(location.search);
     for (const [key, value] of formData) {
       message[key] = value;
     }
-    message.date = new Date().toISOString();
-    return message
+    message.date ??= new Date().toISOString();
+    return message;
   }
 
   const button = document.querySelector('#create-new-message');
@@ -36,7 +37,7 @@ function setUpPublishNewMessage() {
     event.preventDefault();
 
     const message = formatNewMessage(new FormData(form));
-    useMessages(getContextName()).set(message);
+    useMessages(getLocationName()).set(message);
     form.reset();
     dialog.close();
   });
@@ -49,7 +50,7 @@ function insertMessageIntoDom(msg, id, { inserFunctionName = "prepend" } = {}) {
     <div></div>
     <small class="nickname"></small>
     <small><time></time></small>
-  `
+  `;
   div.classList.add("message");
   div.querySelector('div').innerText = msg.message;
   div.querySelector('small').innerText = "By " + msg.nickname;
@@ -57,11 +58,10 @@ function insertMessageIntoDom(msg, id, { inserFunctionName = "prepend" } = {}) {
   document.querySelector('#posts')[inserFunctionName](div);
 }
 
-
 setUpPublishNewMessage();
 
 // Get and show messages
-useMessages(getContextName()).map().once(function (msg, id) {
+useMessages(getLocationName()).map().once(function (msg, id) {
   if (!msg) {
     console.debug('No message arrived:', msg, id);
     return;
@@ -69,10 +69,16 @@ useMessages(getContextName()).map().once(function (msg, id) {
   msg.message && insertMessageIntoDom(msg, id);
 });
 
-// Update title
-const [lat, lon] = getContextName().split(',');
-const toAppend = lon ? `${lat}°, ${lon}°` : getContextName();
-document.querySelector('h1').innerText += ' ' + toAppend;
+if (getLocationName()) {
+  // Update title based on current scope
+  const [lat, lon] = getLocationName().split(',');
+  if (lon) {
+    document.querySelector('h1').innerText += ` ${lat}°, ${lon}°`;
+  } else {
+    document.querySelector('h1').innerText = `· ${getLocationName()} ·`;
+  }
+} else {
 
+}
 
-console.info('Context:', getContextName());
+console.info('Location ~ ', getLocationName());
