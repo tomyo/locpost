@@ -31,7 +31,7 @@
   <form id="send-message">
     <input id="input-message"></input>
     <input id="input-location"></input>
-    
+
     <button>Add</button>
   </form>
 
@@ -66,7 +66,7 @@
     console.log("GunDB: ", dbname)
     locpost = gun.get('locpost')
     messages = gun.get(dbname)
-  
+
     // leaflet stuff
 
     var markers = {}
@@ -89,9 +89,9 @@
        }
     }
     map.on('click', onMapClick);
-  
+
     // Send and receive messages from gun
-    
+
     $('#send-message').on('submit', function (event) {
       var title = $('#input-message').val()
       var lat = $('#input-location').val().split(", ")[0]
@@ -111,7 +111,7 @@
         $('#input-location').val(coords)
         $('#my-location').html("Geolocation is not supported by this browser")
       }
-      
+
       function showPosition(position) {
         coords = position.coords.latitude + ", " + position.coords.longitude
         $('#input-location').val(coords)
@@ -147,7 +147,7 @@
           } else {
             console.log("too far:", msg)
           }
-  
+
         }
       })
       $('#n-results').html("Got " + found + " results")
@@ -167,7 +167,7 @@
       })
       $('#n-results').html("Got " + found + " results")
     })
-    
+
     messages.map().on(function (msg, id) {
       var li = $('#' + id)
       if (!li.get(0)) {
@@ -204,7 +204,7 @@
         messages.get($(element).parent().parent().attr('id')).put({title: $(element).val()})
       }
     }
-    
+
     function clickCheck (element) {
       console.log("Checked element " + element)
       messages.get($(element).parent().attr('id')).put({done: $(element).prop('checked')})
@@ -223,7 +223,7 @@
       console.log("addMarker id=" + id)
       markers[id] = L.marker([msg.latitude, msg.longitude]).addTo(map);
       //markers[id].bindPopup(msg.title).openPopup();
-    }     
+    }
 
     function addIcon(coords, icon) {
       console.log("addIcon")
