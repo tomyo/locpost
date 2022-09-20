@@ -16,21 +16,25 @@ main h1 {
   display: flex;
   place-items: center;
 }
+
 #create-new-message img {
   filter: invert(1);
   width: 1.5rem;
 }
 
 @media (prefers-color-scheme: light) {
+
   #create-new-message {
     background-color: cyan;
   }
+
   #create-new-message img {
     filter: none;
   }
 }
 
 @supports (aspect-ratio: 1) {
+
   #create-new-message {
     aspect-ratio: 1;
     border-radius: 50%;
@@ -52,15 +56,15 @@ main h1 {
 .message:nth-of-type(odd) {
   background-color: rgba(200,200,200,0.3);
 }
+
 .message:nth-of-type(even) {
   background-color: rgba(0,0,0,0.3);
 }
+
 .message > *:first-child {
   margin-block-end: 0.5rem;
-}
-.message > *:first-child {
   font-size: x-large;
-  line-break: anywhere;
+  line-break: auto;
 }
 
 dialog {
@@ -76,11 +80,13 @@ dialog[open] {
 }
 
 @keyframes dialog-show {
+
   from {
-      opacity: 0;
+    opacity: 0;
   }
+
   to {
-     opacity: 1;
+    opacity: 1;
   }
 }
 
