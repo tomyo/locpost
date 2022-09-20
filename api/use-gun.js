@@ -15,15 +15,9 @@ export function useGun({ peers = [
   'http://localhost:8765/gun',
   'https://gunrelayeurope.herokuapp.com/gun',
 ] } = {}) {
-  if (gun) return gun;
-  if (typeof (window.GUN) === 'undefined') throw Error('GUN is not available in global scope');
-
-  gun = window.GUN({ peers });
-  return gun;
+  return gun ? gun : gun = window.GUN({ peers });
 }
 
-export function useMessages(context, { searchKeyPrefix = 'messages-' } = {}) {
-
-  const gun = useGun();
-  return gun.get(searchKeyPrefix + context);
+export function useMessages(scope, { keyPrefix = 'messages-' } = {}) {
+  return useGun().get(keyPrefix + scope);
 }
