@@ -21,20 +21,76 @@ h1, h2, h3, p {
   margin: 0;
 }
 
-button {
+#get-location {
+  --side-arrow-scale: 3;
+  --side-arrow-size: calc(var(--side-arrow-scale) * 1rem);
+
   display: flex;
-  gap: 1rem;
+  width: 9rem;
+  background-color: transparent;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+  border: none;
+  position: relative;
   cursor: pointer;
+  gap: 1rem;
+
 }
 
-button img {
-  width: 3rem;
-  filter: invert(1);
+#get-location img {
+  width: 100%;
+  margin: auto;
 }
 
-@media (prefers-color-scheme: light) {
-  button img {
-    filter: none;
+#get-location::before, #get-location::after {
+  position: absolute;
+  top: calc((6 - var(--side-arrow-scale)) / 3 * 25%);
+  font-size: var(--side-arrow-size);
+  animation-duration: 1s;
+  animation-timing-function: ease;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  filter: blur(1px);
+}
+
+#get-location::before {
+  content: ">";
+  left: calc(-1 * var(--side-arrow-size));
+  animation-name: bounce-left;
+}
+
+#get-location::after {
+  content: "<";
+  right: calc(-1 * var(--side-arrow-size));;
+  animation-name: bounce-right;
+}
+
+@keyframes bounce-left {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-1 * var(--side-arrow-size)));
   }
 }
 
+@keyframes bounce-right {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(var(--side-arrow-size));
+  }
+}
+
+@media (prefers-color-scheme: light) {
+
+  #get-location {
+    box-shadow: 20px 20px 60px #5d5d5d, -20px -20px 60px #505050;
+  }
+}

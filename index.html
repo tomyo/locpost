@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="The censorship resistant location-based messaging app that empowers anyone to have a voice." />
   <title>LocPost</title>
@@ -21,26 +21,25 @@
     </h1>
 
     <h3>
-      The censorship resistant location-based messaging app that empowers anyone to have a voice
+      The censorship resistant messaging app that empowers anyone to communicate anonymously around a location
     </h3>
 
-    <img src="images/radar.svg" alt="Radar" />
+    <button id="get-location" aria-label="Get location">
+      <img src="images/search-location.png" alt="Search around your location button" />
+    </button>
+
+    <p>Click the button above button to request access to your location and be redirected to a censorship-resistant
+      channel to exchange messages anonymously.
+    </p>
 
     <p>
       We use <a href="https://gun.eco/">GUN</a> to create a distributed database which is stored
       amongst the network participants in their local storage inside the web browser. Each participant will
       keep a copy of the database and GUN will take care of keeping them in sync.
     </p>
-    
-    <button id="get-location" aria-label="Get location">
-      <img src="images/customer-support.png">
-    </button>
-
-    <p>If you click the button above, we will request access to your location and based on that you will join
-      a censorship-resistant context (location) to exchange messages.
-    </p>
 
     <p><small>Made with ❤️ from <a href="https://ethberlin.ooo" target="_blank">ETHBerlin³</a></small><br>
-    <small><a href="https://github.com/tomyo/locpost/" target="_blank">Source code</a></small></p>
+      <small><a href="https://github.com/tomyo/locpost/" target="_blank">Source code</a></small>
+    </p>
   </main>
 </body>
