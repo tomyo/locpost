@@ -1,6 +1,6 @@
 # LocPost
 
-Censorship resistant location-based messages that empowers anyone to have a voice.
+The censorship resistant messaging app that empowers anyone to communicate anonymously around a location
 
 Check it out online at https://tomyo.github.io/locpost/
 
@@ -9,7 +9,7 @@ Check it out online at https://tomyo.github.io/locpost/
 We use [GUN](https://gun.eco/) to create a distributed database which is stored amongst the network participants in their local storage inside the web browser.
 Each participant will keep a copy of the database and GUN will take care of keeping them in sync.
 
-By requesting access to your location and based on that, you will join a censorship-resistant context (location) to exchange messages.
+By giving access to your device location, you will join a censorship-resistant channel to exchange messages around that area.
 
 ## Instalation
  * Install pre-commit hook: `pre-commit install`
