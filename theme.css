@@ -7,8 +7,8 @@
 
 
 /* Dark theme: default */
-
 :root {
+  color-scheme: dark;
   --color-background: #38444c;
   --color-border: #697278;
   --color-text-default: #f0f2f3;
@@ -20,13 +20,9 @@
   --border-radius: 5px;
 }
 
-html {
-  color-scheme: dark;
-}
-
 p {
-  line-height: 1.7;
   word-spacing: .05em;
+  line-height: 1.5;
 }
 
 button {
@@ -36,15 +32,8 @@ button {
 img {
   filter: drop-shadow(0 2px 4px #0b0b0b);
   max-width: 100vw;
-  opacity: .85;
-  transition: opacity .3s ease-in-out;
-}
-
-@media (hover: none) {
-
-  img {
-    opacity: 1;
-  }
+  opacity: .75;
+  transition: opacity .5s ease-in-out;
 }
 
 img:hover {
@@ -64,7 +53,9 @@ body {
 
 * {
   box-sizing: border-box;
+  font-family: var(--font-family);
 }
+
 
 a.button, button {
   padding: 0.5rem 1rem;
@@ -76,12 +67,8 @@ a.button, button {
 
 
 @media (prefers-color-scheme: light) {
-
-  html {
-    color-scheme: light;
-  }
-
   :root {
+    color-scheme: light;
     --color-background: antiquewhite;
     --color-border: #cacfd5;
     --color-text-default: #0b1016;
