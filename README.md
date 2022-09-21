@@ -11,7 +11,7 @@ Each participant will keep a copy of the database and GUN will take care of keep
 
 By giving access to your device location, you will join a censorship-resistant channel to exchange messages around that area.
 
-## Instalation
+## Installation
  * Install pre-commit hook: `pre-commit install`
  * Run development environment: `make dev`
 
