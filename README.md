@@ -1,8 +1,8 @@
 # LocPost
 
-The censorship resistant messaging app that empowers anyone to communicate anonymously around a location
+The censorship resistant messaging app that empowers anyone to communicate anonymously around a location.
 
-Check it out online at https://tomyo.github.io/locpost/
+Check it out online at https://tomyo.github.io/locpost/ and join our public room on Matrix: [#locpost:matrix.org](https://matrix.to/#/#locpost:matrix.org).
 
 ![logo](images/search-location-100x100.png)
 
@@ -12,12 +12,15 @@ Each participant will keep a copy of the database and GUN will take care of keep
 By giving access to your device location, you will join a censorship-resistant channel to exchange messages around that area.
 
 ## Installation
- * Install pre-commit hook: `pre-commit install`
- * Run development environment: `make dev`
+
+* Install pre-commit hook: `pre-commit install`
+* Run development environment: `make dev`
 
 ## ETHBerlin³ hackathon
 
 This project was made during the awesome [ETHBerlin³ hackathon](https://ethberlin.ooo/) during 16-18th September 2022.
+
+* https://devfolio.co/projects/locpost-87a5
 
 ## Authors
 
