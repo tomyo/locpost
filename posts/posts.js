@@ -1,4 +1,4 @@
-import { useMessages } from '../api/use-gun.js'
+import { useMessages } from '../hooks/use-gun.js'
 
 function getQueryString(key) {
   return new URLSearchParams(location.search).get(key);
