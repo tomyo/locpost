@@ -13,7 +13,7 @@ let gun;
  */
 export function useGun({ peers = [
   'http://localhost:8765/gun',
-  'https://gunrelayeurope.herokuapp.com/gun',
+  'http://gun-manhattan.herokuapp.com/gun',
 ] } = {}) {
   return gun ? gun : gun = window.GUN({ peers });
 }
