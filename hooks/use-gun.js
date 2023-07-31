@@ -1,15 +1,16 @@
-'use strict'
+"use strict";
 
-import '../lib/gun.js';
-import '../lib/sea.js';
-import '../lib/webrtc.js';
+import "../lib/gun.js";
+import "../lib/sea.js";
+import "../lib/webrtc.js";
 
 let gun;
 
 const config = {
   peers: [
-    'http://localhost:8765/gun',
-    'https://gunrelayeurope.herokuapp.com/gun',
+    "http://localhost:8765/gun",
+    "https://gundb.fly.dev/gun", // Self hosted peer
+    "https://gun-manhattan.herokuapp.com/gun",
   ],
 };
 
@@ -24,5 +25,5 @@ function useGun() {
 }
 
 export function useMessages(key) {
-  return useGun().get('messages-' + key);
+  return useGun().get("messages-" + key);
 }
